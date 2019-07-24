@@ -23,15 +23,9 @@
 
 - ##### `brew search mkdocs` 搜索Homebrew Cask中是否存在mkdocs
 
-  ![搜索Homebrew Cask中是否存在mkdocs](imgs/index/搜索Homebrew Cask中是否存在mkdocs.png)
-
 - ##### `brew install mkdocs` 安装MkDocs
 
-  ![安装MkDocs](imgs/index/安装MkDocs.png)
-
 - #####  `mkdocs --version` 验证安装
-
-  ![验证安装](imgs/index/验证安装.png)
 
 ## 使用
 
