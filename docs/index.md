@@ -16,12 +16,23 @@
 
 - 一个用于创建项目文档的快速、简单、华丽的静态站点生成器，文档源码使用 Markdown 来撰写，用一个 YAML 文件作为配置文档。
 - 构建完全静态的 HTML 站点，可以将它托管到 GitHub pages、Amazon S3 等任意地方。
-- 默认包含大量美观的主题，可以从 bootstrap, readthedocs 和 12 款 bootswatch 主题中选择。
+- 默认包含大量美观的主题，可以在内置主题：mkdocs和readthedocs之间进行选择，也可以在MkDocs wiki中选择任一第三方主题，或者构建自己的主题。
 - 即时预览。
+
+```java
+  内建服务器允许我们在编写文档时预览文档。
+  每当我们保存更改时，其甚至会自动重新加载并刷新我们的浏览器。
+```
+
 - 易于配置。
+
+```java
+  通过自定义主题，让我们的项目文档以我们希望的方式查找。
+```
+
 - 交叉索引。
 
-## 安装
+## 安装(MacOS)
 
 - ##### `brew search mkdocs` 搜索Homebrew Cask中是否存在mkdocs
 
@@ -37,61 +48,194 @@
 
 #### 常用命令
 
-- `help` 帮助 `指定命令 --help : 查看给定命令上可用的选项列表。`
+- `mkdocs --help` 帮助
 
-- `new` 创建新的MkDocs工程
+```java
+  mkdocs 指定命令 --help - 查看给定命令上可用的选项列表。
+  eg.mkdocs new --help - 查看新建工程命令上可用的选项列表。
+```
 
-- `serve` 运行内建的开发服务器
+- `mkdocs new '工程名'` 创建新的MkDocs工程
+- `mkdocs serve` 运行内建的开发服务器
+- `mkdocs build` 构建MkDocs文档
+- `mkdocs gh-deploy` 将文档部署到GitHub页面上
+- `mkdocs json` 将MkDocs文档构建成JSON文件
 
-- `build` 构建MkDocs文档
-
-- `gh-deploy` 将文档部署到GitHub页面上
-
-- `json` 将MkDocs文档构建成JSON文件
+```java
+注*
+以上命令除创建新的MkDocs命令外，均须在工程目录下执行。
+```
 
 #### 操作流程
 
-1.创建工程 - `mkdocs new 工程名`
+1.创建工程 - `mkdocs new MkDocs`
+
+```java
+花一点时间来回顾一下我们创建的初始项目:
+有一个名为mkdocs.yml的配置文件，以及一个名为docs的文件夹，里面是我们文档的源文件。现在，该docs文件夹只包含一个名为index.md的文档页面。
+MkDocs附带一个内建服务器，可以让我们在处理文档时预览文档。确保我们与mkdocs.yml配置文件位于同一目录中，然后启用内建服务器：
+```
 
 2.启用内建服务器 - `mkdocs serve`
 
-3.在浏览器中打开 - `http://127.0.0.1:8000/`
+```java
+➜  MkDocs git:(master) ✗ mkdocs serve
+INFO    -  Building documentation...
+WARNING -  Config value: 'pages'. Warning: The 'pages' configuration option has been deprecated and will be removed in a future release of MkDocs. Use 'nav' instead.
+INFO    -  Cleaning site directory
+[I 190725 14:56:46 server:292] Serving on http://127.0.0.1:8000
+[I 190725 14:56:46 handlers:59] Start watching changes
+[I 190725 14:56:46 handlers:61] Start detecting changes
+[I 190725 14:56:46 handlers:132] Browser Connected: http://127.0.0.1:8000/
+[I 190725 14:56:47 handlers:92] Reload 1 waiters: None
+[I 190725 14:56:47 handlers:132] Browser Connected: http://127.0.0.1:8000/
+[I 190725 14:56:48 handlers:79] Ignore: /usr/local/Cellar/mkdocs/1.0.4_1/libexec/lib/python3.7/site-packages/mkdocs/contrib/search/templates/search/lunr.js
+```
 
-4.添加头部导航条
-
-4.1. 在mkdocs.yml中修改site_name为指定内容
-
-4.2. 在mkdocs.yml中配置导航条
-
-- 在docs目录下新建about.md
-
--  .yml配置文件内容如下
+3.[在浏览器中打开](http://127.0.0.1:8000/)我们将看到显示的默认主页：
 
 ```java
-   site_name: My MkDocs
-   pages:
-   - 首页: index.md
-   - 关于: about.md
+内建服务支持自动重新加载，只要配置文件、文档目录或主题目录中的任何内容发生更改，都将重建文档。
+现在尝试编辑mkdocs.yml配置文件：将site_name值更改为MyMkdocs并保存。
+我们的浏览器将自动重新加载，我们应该立即看到更新过的文档 - 新的站点名称生效。
+```
+
+4.添加页面
+
+- 现在在文档中添加第二页（about.md）：
+
+- 由于我们的文档站点将包含一些导航标题，因此可能需要编辑配置文件，并通过添加`pages`设置在导航标题中添加有关每个页面的顺序、标题和嵌套的一些信息：
+
+```java
+  site_name: My MkDocs
+  pages:
+  - 首页: index.md
+  - 关于: about.md
+```
+
+- 保存更改，现在我们会看到位于导航栏左侧的`主页`和`关于` 菜单项左侧以及位于导航栏右侧的`Search`，`Previous`和`Next`菜单项。
+
+- 尝试菜单项并在页面之间来回导航。然后点击 `Search`。将出现一个搜索对话框，允许我们搜索任何页面上的任何文本。
+
+```java
+  请注意，搜索结果包括网站上每次出现的搜索字词，并直接链接到搜索字词所在页面的部分。我们无需付出任何努力或配置即可完成所有这些工作！
 ```
 
 5.配置主题
 
+- 现在在配置文件中更改主题以更改文档的显示方式。编辑`mkdocs.yml`文件并添加theme设置：
+
 ```java
-在mkdocs.yml中添加主题
-theme: readthedocs
+  site_name: My MkDocs
+  pages:
+  - 主页: index.md
+  - 关于: about.md
+  theme: readthedocs
 ```
 
-6.生成站点 - `mkdocs build`
+- 保存更改，我们将看到正在使用的readthedocs主题
 
-- ##### 如果你使用 git 等版本控制系统，你可能不希望提交构建之后的文档到版本库，在 .gitignore 中添加site/即可忽略该目录`echo "site/" >> .gitignore`
+6.更改favicon图标
 
-- ##### 一段时间后，可能有文件被从源码中移除了，但是相关的文档仍残留在 site 目录中。而在构建命令中添加--clean参数即可移除这些文档`mkdocs build —clean`
+```java
+默认情况下，MkDocs使用MkDocs favicon图标。
+要使用其他图标，须在我们的docs目录下创建img子目录，然后将自定义favicon.ico文件复制到该目录。
+MkDocs将自动检测并使用该文件作为我们的的favicon图标。
+```
 
-7.发布
 
-1. ##### MkDocs 生成的文档只包含静态文件，因此你可以将文档部署到任意地方。GitHub project pages 和Amazon S3 是不错的选择，只需上传 site 目录到你需要发布的位置即可。
-2. ##### 如果是公司的项目，项目文档不能对外开放，你可以上传到公司的GitLab上。
-3. ##### 如果是个人的项目，你可以上传到GitHub上。
+
+7.生成站点 - `mkdocs build`
+
+至此，我们已经准备好部署My MkDocs文档的第一个过程。
+
+- 首先构建文档
+
+```java
+	mkdocs build
+```
+
+- 这将创建一个名为`site`的新目录。看一下目录：
+
+```java
+  ➜  site git:(master) ✗ tree -L 2
+  .
+  ├── 404.html
+  ├── about
+  │   └── index.html
+  ├── css
+  │   ├── base.css
+  │   ├── bootstrap-custom.min.css
+  │   └── font-awesome.min.css
+  ├── fonts
+  │   ├── fontawesome-webfont.eot
+  │   ├── fontawesome-webfont.svg
+  │   ├── fontawesome-webfont.ttf
+  │   ├── fontawesome-webfont.woff
+  │   ├── fontawesome-webfont.woff2
+  │   ├── glyphicons-halflings-regular.eot
+  │   ├── glyphicons-halflings-regular.svg
+  │   ├── glyphicons-halflings-regular.ttf
+  │   ├── glyphicons-halflings-regular.woff
+  │   └── glyphicons-halflings-regular.woff2
+  ├── img
+  │   ├── favicon.ico
+  │   ├── grid.png
+  │   └── index
+  ├── index.html
+  ├── js
+  │   ├── base.js
+  │   ├── bootstrap-3.0.3.min.js
+  │   └── jquery-1.10.2.min.js
+  ├── search
+  │   ├── lunr.js
+  │   ├── main.js
+  │   ├── search_index.json
+  │   └── worker.js
+  ├── sitemap.xml
+  └── sitemap.xml.gz
+  请注意，我们的源文档已输出为两个名为index.html和about/index.html的HTML文件。
+  我们还有各种其他媒体已作为文档主题的部分复制到site了目录中。
+  我们甚至有一个sitemap.xml文件和mkdocs/search_index.json。
+```
+
+- 如果我们正在使用源代码控制，例如`git`；我们可能不希望将文档构建检查添加到存储库中。因此添加包含 `site/`的行在我们的`.gitignore`文件中。
+
+```java
+	echo "site/" >> .gitignore
+```
+
+- 一段时间后，文件可能会从文档中删除，但它们仍将驻留在`site`目录中。要删除这些陈旧文件，只需`mkdocs` 使用`--clean`开关运行即可。
+
+```java
+	mkdocs build --clean
+```
+
+8.其它命令和选项
+
+- 还有其他各种命令和选项。有关命令的完整列表，请使用`--help`标志：
+
+```java
+	mkdocs --help
+```
+
+- 要查看给定命令上可用的选项列表，请使用带该命令标志的`--help`。例如，要获取该`build`命令可用的所有选项的列表，请运行以下命令：
+
+```java
+	mkdocs build --help
+```
+
+9.部署
+
+- 我们刚刚构建的文档站点仅使用静态文件，因此我们几乎可以在任何地方托管它。
+- [GitHub项目页面](https://help.github.com/articles/creating-project-pages-manually/)和[Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)可能是很好的托管选项（具体取决于我们的需求）。
+- 将整个`site`目录的内容上传到您托管网站的任何地方，然后我们就完成了（有关许多常见主机的具体说明，请参阅[部署您的文档](https://www.mkdocs.org/user-guide/deploying-your-docs/)页面）。
+
+```java
+注*：
+	1. 如果是公司的项目，项目文档不能对外开放，我们可以上传到公司的GitLab上。
+	2. 如果是个人的项目，我们可以上传到GitHub上
+```
 
 ## 注意
 
@@ -199,10 +343,8 @@ MkDocs包含许多不同的内置的样式和扩展的样式，也可以很容�
 - ##### 目前可用的样式包括mkdocs和readthedocs两种
 
   ![mkdocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/mkdocs主题.png)
-
-
-
-![readthedocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/readthedocs主题.png)
+  
+  ![readthedocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/readthedocs主题.png)
 
 ```java
 其它几个主题需要安装，因为不会附带，但是安装的时候提示升级，升级的时候提示错误，所以我就忽略了，重点在文档的内容，主题什么的以后再说吧！
