@@ -198,11 +198,11 @@ MkDocs包含许多不同的内置的样式和扩展的样式，也可以很容�
 
 - ##### 目前可用的样式包括mkdocs和readthedocs两种
 
-  ![mkdocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/imgs/index/mkdocs主题.png)
+  ![mkdocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/mkdocs主题.png)
 
 
 
-![readthedocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/imgs/index/readthedocs主题.png)
+![readthedocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/readthedocs主题.png)
 
 ```java
 其它几个主题需要安装，因为不会附带，但是安装的时候提示升级，升级的时候提示错误，所以我就忽略了，重点在文档的内容，主题什么的以后再说吧！
