@@ -65,7 +65,7 @@
 
 -  .yml配置文件内容如下
 
-```
+```java
    site_name: My MkDocs
    pages:
    - 首页: index.md
@@ -74,7 +74,7 @@
 
 5.配置主题
 
-```
+```java
 在mkdocs.yml中添加主题
 theme: readthedocs
 ```
@@ -101,8 +101,120 @@ theme: readthedocs
 
 ## 前言
 
+前面一篇讲了如果搭建自己的MkDocs来管理自己的文档，在搭建完成后既可以使用内设的小型服务器来生成一个静态的站点、又可以将我们的site文件夹直接放到服务器上；
+
+```java
+eg.
+放在本地的Tomcat: apacht-comcat-8.0.36\webapps路径下，启用自己的Tomcat，就能够直接访问：http://ipaddress:8080/site/，就会默认打开site目录下的index.html。
+同理，我们也可以将其放到自己公司的服务器或者托管到GithubPages上；
+```
+
+## 项目发布到GitHub Pages
+
+1. 创建名为`username.github.io`的空`repository`
+2. 将仓库`clone`到本地
+3. 将mkdocs文档生成的site文件夹下的所有内容复制到本地的仓库中并`push`到github上
+4. 访问`username.github.io`，默认就会打开仓库的根目录下的index.html这个网页 - 恭喜你，大功告成！
+
 ## 编辑
+
+- 配置页面和导航栏（在mkdocs.yml配置文件中定义的页面才会被mkdocs创建，然后显示在导航栏上）
+
+```java
+    简单的配置页面：
+
+    pages:
+    - 首页: index.md
+    - 关于: about.md
+```
+
+- 多级导航栏（按照下面的代码创建的子选项会被以列表的形式，显示在所属的导航条下）
+
+```java
+    pages:
+    - 首页: index.md
+    - 用户指南:
+        - 编辑你的文档: user-guide/writing-your-docs.md
+        - 设计你的文档: user-guide/styling-your-docs.md
+    - 关于:
+        - 许可证: about/license.md
+        - 发行说明: about/release-notes.md
+```
+
+- 文件的路径（如果MarkDown文件是在一个site中，那么文档的URL就是文档的路径）
+
+```java
+    docs/
+        index.md
+        user-guide/getting-started.md
+        user-guide/configuration-options.md
+        license.md
+        getting-started.md这个文档的路径就是user-guide/getting-started.md，默认根目录就是docs
+        这样的话，就可以在一个文档中链接另外一个文档了，即可以从文档A中打开文档B，见下面的内容。
+```
+
+- 内部链接（从一个文档中打开另外一个文档）
+
+```java
+    [如何开始构建文档](user-guide/getting-started.md)
+    其实最后会被转化成从一个网页打开另外一个网页
+```
+
+- 显示图片（路径如下：）
+
+```java
+    mkdocs.yml
+    docs/
+        CNAME
+        index.md
+        about.md
+        license.md
+        img/
+            screenshot.png
+            
+    在MarkDown中写法如下，其实这个就是markdown的标准语法，圆括号中的就是图片的地址，可以是本地的地址，也可以是网络的地址：
+    ![Screenshot](img/screenshot.png)
+```
+
+- MarkDown语法扩展
+
+
+```java
+	推荐一个十分不错的MarkDown软件Typora
+```
 
 ## 样式
 
+MkDocs包含许多不同的内置的样式和扩展的样式，也可以很容易的实现个性定制
+
+- ##### 想要使用内置的样式，只要在配置文件中写入下列代码：
+
+```java
+    theme: readthedocs
+    即 theme: 样式的名称
+```
+
+- ##### 目前可用的样式包括mkdocs和readthedocs两种
+
+```java
+    其它几个主题需要安装，因为不会附带，但是安装的时候提示升级，升级的时候提示错误，所以我就忽略了，重点在文档的内容，主题什么的以后再说吧！
+```
+
 ## 配置
+
+下面给出部分主要的配置信息：
+
+#### 项目信息
+
+- ##### `site_name` 站点的名称，这个配置是必须的，并且会显示在网页的顶部
+
+```java
+	site_name: The Library of Development
+```
+
+- ##### `site_description` 站点的描述
+
+```java
+	配置信息太多了，可以查看中文文档的翻译，然后从官方网站上复制代码
+```
+
