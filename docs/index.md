@@ -70,6 +70,8 @@
 
 1.创建工程 - `mkdocs new MkDocs`
 
+![](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/回顾一下我们创建的初始项目.png)
+
 ```java
 花一点时间来回顾一下我们创建的初始项目:
 有一个名为mkdocs.yml的配置文件，以及一个名为docs的文件夹，里面是我们文档的源文件。现在，该docs文件夹只包含一个名为index.md的文档页面。
@@ -94,11 +96,15 @@ INFO    -  Cleaning site directory
 
 3.[在浏览器中打开](http://127.0.0.1:8000/)我们将看到显示的默认主页：
 
+![默认主页](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/默认主页.png)
+
 ```java
 内建服务支持自动重新加载，只要配置文件、文档目录或主题目录中的任何内容发生更改，都将重建文档。
 现在尝试编辑mkdocs.yml配置文件：将site_name值更改为MyMkdocs并保存。
 我们的浏览器将自动重新加载，我们应该立即看到更新过的文档 - 新的站点名称生效。
 ```
+
+![新的站点名称生效](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/新的站点名称生效.png)
 
 4.添加页面
 
@@ -114,6 +120,8 @@ INFO    -  Cleaning site directory
 ```
 
 - 保存更改，现在我们会看到位于导航栏左侧的`主页`和`关于` 菜单项左侧以及位于导航栏右侧的`Search`，`Previous`和`Next`菜单项。
+
+![导航栏及菜单项列表](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/导航栏及菜单项列表.png)
 
 - 尝试菜单项并在页面之间来回导航。然后点击 `Search`。将出现一个搜索对话框，允许我们搜索任何页面上的任何文本。
 
@@ -134,6 +142,8 @@ INFO    -  Cleaning site directory
 ```
 
 - 保存更改，我们将看到正在使用的readthedocs主题
+
+![readthedocs主题](https://raw.githubusercontent.com/MoeRookie/MkDocs/master/docs/img/index/readthedocs主题.png)
 
 6.更改favicon图标
 
